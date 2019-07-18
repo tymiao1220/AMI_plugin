@@ -37,7 +37,7 @@ before_install:
 
     - export MONGO_VERSION=3.2.18
     - export PY_COVG="ON"
-    - CACHE=$HOME/.cache source $girder_path/scripts/install_mongo.sh
+    - CACHE=$HOME/.cache source $GIRDER_PATH/scripts/install_mongo.sh
     - mkdir /tmp/db
     - mongod --dbpath=/tmp/db >/dev/null 2>/dev/null &
     - mongod --version
