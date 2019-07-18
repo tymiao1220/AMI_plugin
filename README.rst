@@ -10,4 +10,4 @@ AMI_plugin |build-status| |codecov-io|
     :target: https://codecov.io/github/tymiao1220/AMI_plugin?branch=master
     :alt: codecov.io
 
-Girder plugin for creating and displaying image histograms.
+Girder plugin for radiomics image and overlay view.
