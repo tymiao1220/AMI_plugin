@@ -23,7 +23,7 @@ before_install:
     - GIRDER_BUILD_PATH=$HOME/girder_build
     - AMI_PATH=$TRAVIS_BUILD_DIR
 
-    - ls $AMI_PATH
+    - ls -l $AMI_PATH
 
     - mkdir -p $HOME/.cache/node_modules || true
     - ln -sf $HOME/.cache/node_modules .
