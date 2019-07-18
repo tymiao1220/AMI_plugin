@@ -48,7 +48,6 @@ install:
     - popd
 
     - girder-install plugin --symlink $AMI_PATH
-    - ln -sf $main_path $GIRDER_PATH/plugins/
     - ls -l $GIRDER_PATH/plugins
 
     - npm-install-retry
