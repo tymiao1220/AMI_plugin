@@ -50,7 +50,7 @@ install:
     - ls -l $GIRDER_PATH/plugins
 
     - npm-install-retry
-    - girder-install web --plugins=AMI_plugin --dev
+    - girder-install web --dev
 
 script:
   - mkdir -p $GIRDER_BUILD_PATH
@@ -58,6 +58,11 @@ script:
   - cmake -DPYTHON_VERSION:STRING=${TRAVIS_PYTHON_VERSION} -DRUN_CORE_TESTS:BOOL="OFF" -DTEST_PLUGINS:STRING="AMI_plugin" $GIRDER_PATH
   - make -j 3
   - JASMINE_TIMEOUT=15000 ctest -VV
+
+after_failure:
+  # On failures, show the worker output and other information
+  - pip freeze
+  - cat /tmp/worker.out
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -R $AMI_PATH -s $GIRDER_PATH
