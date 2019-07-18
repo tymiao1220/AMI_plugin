@@ -3,7 +3,7 @@ import Model from 'girder/models/Model';
 import { restRequest } from 'girder/rest';
 
 import ElementCollection from '../collections/ElementCollection';
-//import convert from '../annotations/convert';
+// import convert from '../annotations/convert';
 
 /**
  * Define a backbone model representing an annotation.
@@ -37,7 +37,7 @@ export default Model.extend({
         this._elements = new ElementCollection(
             this.get('annotation').elements || []
         );
-    
+
         this._elements.annotation = this;
 
         this.listenTo(this._elements, 'change add remove reset', () => {
@@ -76,8 +76,8 @@ export default Model.extend({
         }
         this._inFetch = true;
         return restRequest(restOpts).done((resp) => {
-            const annotation = resp.annotation || {};
-            const elements = annotation.elements || [];
+            // const annotation = resp.annotation || {};
+            // const elements = annotation.elements || [];
 
             this.set(resp);
             if (this._pageElements === undefined && resp._elementQuery) {
@@ -89,7 +89,7 @@ export default Model.extend({
                 this.trigger('g:fetched');
             }
 
-    //        this._elements.reset(elements, _.extend({sync: true}, opts));
+            // this._elements.reset(elements, _.extend({sync: true}, opts));
         }).fail((err) => {
             this.trigger('g:error', err);
         }).always(() => {
@@ -190,12 +190,12 @@ export default Model.extend({
      * WARNING: Not all annotations are representable in geojson.
      * Annotation types that cannot be converted will be ignored.
      */
-/*    geojson() {
-        const json = this.get('annotation') || {};
-        const elements = json.elements || [];
-        return convert(elements, {annotation: this.id});
-    },
-*/
+    // geojson() {
+    //     const json = this.get('annotation') || {};
+    //     const elements = json.elements || [];
+    //     return convert(elements, {annotation: this.id});
+    // },
+
     /**
      * Set the view.  If we are paging elements, possibly refetch the elements.
      * Callers should listen for the g:fetched event to know when new elements

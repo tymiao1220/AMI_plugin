@@ -1,0 +1,6 @@
+{
+  "extends": "girder",
+  "globals": {
+      "THREE": true
+  }
+}

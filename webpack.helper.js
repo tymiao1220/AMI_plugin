@@ -1,5 +1,6 @@
 module.exports = function (config) {
     
+    config.resolve.extensions = ['.ts', '.js', '.json'];
     config.module.rules.push({
         resource: {
             test: /\.scss$/,
@@ -24,6 +25,17 @@ module.exports = function (config) {
                 options: {
                     presets: ['env']
                 }
+            }
+        ]
+    });
+    config.module.rules.push({
+        resource: {
+            test: /\.ts$/   ///node_modules(\/|\\)dicom-parser\.js(\/|\\).*.js$/,
+         //   include: //[/node_modules(\/|\\)dicom-parser\.js(\/|\\)/]
+        },
+        use: [
+            {
+                loader: 'ts-loader'
             }
         ]
     });

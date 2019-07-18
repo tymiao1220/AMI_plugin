@@ -2,12 +2,13 @@
     "name": "AMI_plugin",
     "description": "A Python and REST API for AMI Image Viewer",
     "version": "0.1.0",
-    "dependencies": ["worker","slicer_cli_web_SSR"],
+    "dependencies": [],
     "grunt": {
         "file": "Gruntfile.js"
     },
     "npm": {
         "dependencies": {
+            "ami.js":"^0.25.0",
             "stats-js":"^1.0.0-alpha1",
             "dat.gui":"^0.7.2",
             "dicom-parser":"1.7.3",
@@ -18,12 +19,15 @@
             "nifti-reader-js": "v0.5.3",
             "nrrd-js": "^0.2.1",
             "pako": "1.0.1",
-            "three": "0.92.0",
+            "three": "latest",
             "style-loader":"^0.19.0",
             "pug-loader":"^2.3.0",
             "css-loader":"^0.28.7",
             "stylus-loader":"^3.0.1",
-            "three-stl-loader":"^1.0.6"
+            "three-stl-loader":"^1.0.6",
+            "webpack": "^4.16.3",
+            "ts-loader": "^5.2.1",
+            "typescript":"^3.1.1"
         },
          "localNodeModules": true
     },
