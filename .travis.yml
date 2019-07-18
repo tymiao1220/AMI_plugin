@@ -45,8 +45,10 @@ before_install:
 install:
     - pushd $GIRDER_PATH
     - pip install -U --upgrade-strategy eager -r requirements-dev.txt
+    - popd
 
     - girder-install plugin --symlink $AMI_PATH
+    - ln -sf $main_path $girder_path/plugins/
     - ls -l $GIRDER_PATH/plugins
 
     - npm-install-retry
