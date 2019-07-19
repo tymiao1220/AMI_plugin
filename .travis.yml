@@ -46,9 +46,9 @@ before_install:
 
 install:
     - pushd $GIRDER_PATH
+    - pip install -U --upgrade-strategy eager -r requirements-dev.txt
     - cd $PWD/plugins
     - ln -sf $AMI_PATH .
-    - pip install -U --upgrade-strategy eager -r requirements-dev.txt
     - popd
 
     - ls -l $GIRDER_PATH/plugins
