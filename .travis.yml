@@ -31,11 +31,12 @@ before_install:
     - main_path=$PWD
     - build_path=$PWD/build
     - mkdir -p $build_path
+
     - GIRDER_PATH=$build_path/girder
-    - rm -fr $GIRDER_PATH
+    - rm -rf $GIRDER_PATH
     - git clone https://github.com/girder/girder.git $GIRDER_PATH && git -C $GIRDER_PATH checkout $GIRDER_VERSION
 
-    - cp -r $main_path $GIRDER_PATH/plugins/
+    - ln -sf $main_path $GIRDER_PATH/plugins/
     - ls -l $GIRDER_PATH/plugins
 
     - export MONGO_VERSION=3.2.18
