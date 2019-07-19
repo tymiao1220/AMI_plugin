@@ -23,9 +23,6 @@ before_install:
     - GIRDER_BUILD_PATH=$HOME/girder_build
     - AMI_PATH=$TRAVIS_BUILD_DIR
 
-    - ls -l $PWD
-    - ls -l $AMI_PATH
-
     - mkdir -p $HOME/.cache/node_modules || true
     - ln -sf $HOME/.cache/node_modules .
     - nvm install v8
@@ -37,6 +34,9 @@ before_install:
     - git clone https://github.com/girder/girder.git $GIRDER_PATH && git -C $GIRDER_PATH checkout $GIRDER_VERSION
     - CACHE=$HOME/.cache CMAKE_VERSION=3.4.3 CMAKE_SHORT_VERSION=3.4 source $GIRDER_PATH/scripts/install_cmake.sh
     - cmake --version
+
+    - ln -sf $AMI_PATH $GIRDER_PATH/plugins/
+    - ls -l $GIRDER_PATH/plugins
 
     - export MONGO_VERSION=3.2.18
     - export PY_COVG="ON"
