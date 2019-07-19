@@ -57,9 +57,10 @@ before_install:
 install:
     - cd $GIRDER_PATH
     - pip install -U --upgrade-strategy eager -r requirements-dev.txt
+    - pip install -U --upgrade-strategy eager -e .[AMI_plugin]
 
     - npm-install-retry
-    - girder-install web --plugins=AMI_plugin --dev
+    - BABEL_ENV=cover NYC_CWD="$main_path" girder-install web --plugins=AMI_plugin --dev
 
     - pip freeze  # report what we have installed
 script:
