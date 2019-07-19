@@ -1,6 +1,9 @@
+import _ from 'underscore';
+
 import router from 'girder/router';
-import AMIViewer from './views/AMIViewerSEG';
 import { restRequest } from 'girder/rest';
+
+import AMIViewer from './views/AMIViewerSEG';
 
 router.route('plugins/AMI/:id/view', 'histogramConfig', function (itemId, params) {
     // reconstructed url array
@@ -12,12 +15,14 @@ router.route('plugins/AMI/:id/view', 'histogramConfig', function (itemId, params
             displayUrl = 'api/v1/file/' + files[0]['_id'] + '/download?contentDisposition=attachment&contentType=application%2Fnrrd';
         } else {
             displayUrl = _.map(files, function (eachFile) {
-                return 'api/v1/file/'+eachFile['_id'] + '/download?contentDisposition=attachment';
+                return 'api/v1/file/' + eachFile['_id'] + '/download?contentDisposition=attachment';
             });
         }
         this.amiDisplayPreview = new AMIViewer({
-            el:'body'
+            el: 'body'
         });
         this.amiDisplayPreview.render(true, displayUrl);
+
+        return null;
     });
 });
