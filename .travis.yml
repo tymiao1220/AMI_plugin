@@ -55,7 +55,7 @@ install:
     - ls -l $GIRDER_PATH/plugins/AMI_plugin/
 
     - npm-install-retry
-    - girder-install web --plugins=dicom_viewer --dev
+    - girder-install web --plugins=AMI_plugin --dev
 
 script:
   - mkdir -p $GIRDER_BUILD_PATH
