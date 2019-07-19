@@ -39,6 +39,7 @@ before_install:
     - ls -l $main_path
     - ln -sf $main_path $GIRDER_PATH/plugins/
     - ls -l $GIRDER_PATH/plugins
+    - cd $GIRDER_PATH/plugins/AMI_plugin
 
     - export MONGO_VERSION=3.2.18
     - export PY_COVG="ON"
