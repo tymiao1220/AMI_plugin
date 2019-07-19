@@ -18,11 +18,6 @@ before_install:
     # https://github.com/travis-ci/travis-ci/issues/7940
     - sudo rm -f /etc/boto.cfg
 
-    - GIRDER_VERSION=2.x-maintenance
-    - GIRDER_PATH=$HOME/girder/girder
-    - GIRDER_BUILD_PATH=$HOME/girder_build
-    - AMI_PATH=$TRAVIS_BUILD_DIR
-
     - mkdir -p $HOME/.cache/node_modules || true
     - ln -sf $HOME/.cache/node_modules .
     - nvm install v8
@@ -31,11 +26,16 @@ before_install:
     - npm --version
     - npm prune
 
+    - GIRDER_VERSION=2.x-maintenance
+    - GIRDER_BUILD_PATH=$HOME/girder_build
+    - main_path=$PWD
+    - build_path=$PWD/build
+    - mkdir -p $build_path
+    - GIRDER_PATH=$build_path/girder
+    - rm -fr $GIRDER_PATH
     - git clone https://github.com/girder/girder.git $GIRDER_PATH && git -C $GIRDER_PATH checkout $GIRDER_VERSION
-    - CACHE=$HOME/.cache CMAKE_VERSION=3.4.3 CMAKE_SHORT_VERSION=3.4 source $GIRDER_PATH/scripts/install_cmake.sh
-    - cmake --version
 
-    - cp -r $AMI_PATH $GIRDER_PATH/plugins/
+    - cp -r $main_path $GIRDER_PATH/plugins/
     - ls -l $GIRDER_PATH/plugins
 
     - export MONGO_VERSION=3.2.18
@@ -45,14 +45,16 @@ before_install:
     - mongod --dbpath=/tmp/db >/dev/null 2>/dev/null &
     - mongod --version
 
+    - CACHE=$HOME/.cache CMAKE_VERSION=3.4.3 CMAKE_SHORT_VERSION=3.4 source $GIRDER_PATH/scripts/install_cmake.sh
+    - cmake --version
 install:
-    - pushd $GIRDER_PATH
+    - cd $GIRDER_PATH
     - pip install -U --upgrade-strategy eager -r requirements-dev.txt
-    - popd
 
     - npm-install-retry
     - girder-install web --plugins=AMI_plugin --dev
 
+    - pip freeze  # report what we have installed
 script:
     - mkdir -p $GIRDER_BUILD_PATH
     - cd $GIRDER_BUILD_PATH
@@ -66,4 +68,4 @@ after_failure:
     - cat /tmp/worker.out
 
 after_success:
-    - bash <(curl -s https://codecov.io/bash) -R $AMI_PATH -s $GIRDER_PATH
+    - bash <(curl -s https://codecov.io/bash) -R $main_path -s $GIRDER_PATH
