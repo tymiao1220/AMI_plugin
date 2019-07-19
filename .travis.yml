@@ -35,7 +35,7 @@ before_install:
     - CACHE=$HOME/.cache CMAKE_VERSION=3.4.3 CMAKE_SHORT_VERSION=3.4 source $GIRDER_PATH/scripts/install_cmake.sh
     - cmake --version
 
-    - cp $AMI_PATH $GIRDER_PATH/plugins/
+    - cp -r $AMI_PATH $GIRDER_PATH/plugins/
     - ls -l $GIRDER_PATH/plugins
 
     - export MONGO_VERSION=3.2.18
@@ -54,16 +54,16 @@ install:
     - girder-install web --plugins=AMI_plugin --dev
 
 script:
-  - mkdir -p $GIRDER_BUILD_PATH
-  - cd $GIRDER_BUILD_PATH
-  - cmake -DPYTHON_VERSION:STRING=${TRAVIS_PYTHON_VERSION} -DRUN_CORE_TESTS:BOOL="OFF" -DTEST_PLUGINS:STRING="AMI_plugin" $GIRDER_PATH
-  - make -j 3
-  - JASMINE_TIMEOUT=15000 ctest -VV
+    - mkdir -p $GIRDER_BUILD_PATH
+    - cd $GIRDER_BUILD_PATH
+    - cmake -DPYTHON_VERSION:STRING=${TRAVIS_PYTHON_VERSION} -DRUN_CORE_TESTS:BOOL="OFF" -DTEST_PLUGINS:STRING="AMI_plugin" $GIRDER_PATH
+    - make -j 3
+    - JASMINE_TIMEOUT=15000 ctest -VV
 
 after_failure:
-  # On failures, show the worker output and other information
-  - pip freeze
-  - cat /tmp/worker.out
+    # On failures, show the worker output and other information
+    - pip freeze
+    - cat /tmp/worker.out
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -R $AMI_PATH -s $GIRDER_PATH
+    - bash <(curl -s https://codecov.io/bash) -R $AMI_PATH -s $GIRDER_PATH
