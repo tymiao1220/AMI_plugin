@@ -57,7 +57,7 @@ before_install:
 install:
     - cd $GIRDER_PATH
     - pip install -U --upgrade-strategy eager -r requirements-dev.txt
-    - pip install -U --upgrade-strategy eager -e .[AMI_plugin]
+    - pip install -U --upgrade-strategy eager -e .
 
     - npm-install-retry
     - girder-install web --plugins=AMI_plugin --dev
