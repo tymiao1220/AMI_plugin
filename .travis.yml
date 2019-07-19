@@ -36,6 +36,7 @@ before_install:
     - rm -rf $GIRDER_PATH
     - git clone https://github.com/girder/girder.git $GIRDER_PATH && git -C $GIRDER_PATH checkout $GIRDER_VERSION
 
+    - ls -l $main_path
     - ln -sf $main_path $GIRDER_PATH/plugins/
     - ls -l $GIRDER_PATH/plugins
 
