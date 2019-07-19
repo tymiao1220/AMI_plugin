@@ -23,7 +23,8 @@ before_install:
     - GIRDER_BUILD_PATH=$HOME/girder_build
     - AMI_PATH=$TRAVIS_BUILD_DIR
 
-    - echo $AMI_PATH
+    - ls -l $PWD
+    - ls -l $AMI_PATH
 
     - mkdir -p $HOME/.cache/node_modules || true
     - ln -sf $HOME/.cache/node_modules .
@@ -47,12 +48,7 @@ before_install:
 install:
     - pushd $GIRDER_PATH
     - pip install -U --upgrade-strategy eager -r requirements-dev.txt
-    - cd $PWD/plugins
-    - ln -sf $AMI_PATH .
     - popd
-
-    - ls -l $GIRDER_PATH/plugins
-    - ls -l $GIRDER_PATH/plugins/AMI_plugin/
 
     - npm-install-retry
     - girder-install web --plugins=AMI_plugin --dev
