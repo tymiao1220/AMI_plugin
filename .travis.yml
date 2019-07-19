@@ -35,7 +35,7 @@ before_install:
     - CACHE=$HOME/.cache CMAKE_VERSION=3.4.3 CMAKE_SHORT_VERSION=3.4 source $GIRDER_PATH/scripts/install_cmake.sh
     - cmake --version
 
-    - ln -sf $AMI_PATH $GIRDER_PATH/plugins/
+    - mv $AMI_PATH $GIRDER_PATH/plugins/
     - ls -l $GIRDER_PATH/plugins
 
     - export MONGO_VERSION=3.2.18
