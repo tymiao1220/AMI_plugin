@@ -52,6 +52,7 @@ install:
     - popd
 
     - ls -l $GIRDER_PATH/plugins
+    - ls -l $GIRDER_PATH/plugins/AMI_plugin/
 
     - npm-install-retry
     - girder-install web --plugins=dicom_viewer --dev
